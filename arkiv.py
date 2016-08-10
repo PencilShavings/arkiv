@@ -1,15 +1,59 @@
 #!/usr/bin/env python
 __author__ = 'dummy'
 
-import sys
 import osutil
+import argh
+
+prog = 'arkiv'
+version = '0.1'
+description = 'A simple cli app for creating & extracting tarballs.'
+
+@argh.arg('target', help='Directory to archive')
+@argh.arg('--dst', help='Path where to create the archive')
+@argh.arg('-v', '--verbose', help='Show more info')
+def create(target, dst='', verbose=True):
+	"""Create Archive"""
+
+	# Check if the target exists
+	if not osutil.dir_exists(target):
+		print '"' + target + '" does not exist.'
+		exit()
+
+	# Check if the dst exists
+	if not dst == '':
+		if not osutil.dir_exists(dst):
+			print '"' + dst + '" does not exist.'
+			exit()
+
+	# Create the Archive
+	osutil.targz(target, dst=dst, verbose=verbose)
+
+@argh.arg('target', help='The tarball to extract')
+@argh.arg('--dst', help='Path where to extract the archive')
+@argh.arg('-v', '--verbose', help='Show more info')
+@argh.arg('-r', '--remove', help='Remove the tarball after extraction')
+def extract(target, dst='', verbose=True, remove=False):
+	"""Extract Archive"""
+
+	# Check if the target exists
+	if not osutil.file_exists(target):
+		print '"' + target + '" does not exist.'
+		exit()
+
+	# Check if the dst exists
+	if not dst == '':
+		if not osutil.dir_exists(dst):
+			print '"' + dst + '" does not exist.'
+			exit()
+
+	# Extract the Archive
+	osutil.targz(target, dst=dst, extract=True, verbose=verbose)
+
+	# Remove the Archive
+	if remove:
+		osutil.rm(target, verbose=verbose)
 
 if __name__ == '__main__':
-
-	if len(sys.argv) != 2:
-		print 'Please specify a dir to archive'
-	else:
-		if osutil.dir_exists(sys.argv[1]):
-			osutil.targz(sys.argv[1])
-		else:
-			print str(sys.argv[1]) + ' does not exist.'
+	praser = argh.ArghParser(prog=prog, version='%(prog)s ' + version, description=description)
+	praser.add_commands([create, extract])
+	argh.dispatch(praser)
