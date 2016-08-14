@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-__author__ = 'dummy'
+__author__ = 'PencilShavings'
 
 import osutil
 import argh
@@ -30,9 +30,10 @@ def create(target, dst='', verbose=True):
 
 @argh.arg('target', help='The tarball to extract')
 @argh.arg('--dst', help='Path where to extract the archive')
+@argh.arg('-i', '--into', help='Extract contents of archive into DST')
 @argh.arg('-v', '--verbose', help='Show more info')
 @argh.arg('-r', '--remove', help='Remove the tarball after extraction')
-def extract(target, dst='', verbose=True, remove=False):
+def extract(target, dst='', into=False, verbose=True, remove=False):
 	"""Extract Archive"""
 
 	# Check if the target exists
@@ -47,7 +48,7 @@ def extract(target, dst='', verbose=True, remove=False):
 			exit()
 
 	# Extract the Archive
-	osutil.targz(target, dst=dst, extract=True, verbose=verbose)
+	osutil.targz(target, dst=dst, extract=True, into=into, verbose=verbose)
 
 	# Remove the Archive
 	if remove:
