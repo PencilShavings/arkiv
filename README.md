@@ -42,7 +42,6 @@ OR just download the script:
 wget -N https://raw.githubusercontent.com/PencilShavings/arkiv/master/arkiv.py
 ```
 
-Place arkiv.py somewhere in your PATH:
-- Linux: $HOME/.local/bin/
+Recommend to rename arkiv.py to just arkiv & place it somewhere in your PATH for a more cohesive cli experience.
 
-Recommend to rename arkiv.py to just arkiv for a more cohesive cli experience.
+NOTE: If you download just the script, don't forget to make it executable.
