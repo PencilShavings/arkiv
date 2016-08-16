@@ -1,12 +1,12 @@
 #!/usr/bin/env python
+"""A simple cli app for creating & extracting tarballs."""
+
 __author__ = 'PencilShavings'
+__version__ = '0.1'
+
 
 import osutil
 import argh
-
-prog = 'arkiv'
-version = '0.1'
-description = 'A simple cli app for creating & extracting tarballs.'
 
 @argh.arg('target', help='Directory to archive')
 @argh.arg('--dst', help='Path where to create the archive')
@@ -55,6 +55,6 @@ def extract(target, dst='', into=False, verbose=True, remove=False):
 		osutil.rm(target, verbose=verbose)
 
 if __name__ == '__main__':
-	praser = argh.ArghParser(prog=prog, version='%(prog)s ' + version, description=description)
+	praser = argh.ArghParser(prog=__file__.partition('/')[2].rpartition('.')[0], version='%(prog)s ' + __version__, description=__doc__)
 	praser.add_commands([create, extract])
 	argh.dispatch(praser)
