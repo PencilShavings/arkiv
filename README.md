@@ -24,7 +24,7 @@ arkiv requires the following:
 - python-osutil
 - python-argh
 
-Python Modules can be installed with pip:
+Python Modules can be installed via pip:
 ```bash
 pip install --user argh osutil
 ```
