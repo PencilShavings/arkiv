@@ -11,7 +11,7 @@ import argh
 @argh.arg('target', help='Directory to archive')
 @argh.arg('--dst', help='Path where to create the archive')
 @argh.arg('-v', '--verbose', help='Show more info')
-def create(target, dst='', verbose=True):
+def create(target, dst='', verbose=False):
 	"""Create Archive"""
 
 	# Check if the target exists
@@ -33,7 +33,7 @@ def create(target, dst='', verbose=True):
 @argh.arg('-i', '--into', help='Extract contents of archive into DST')
 @argh.arg('-v', '--verbose', help='Show more info')
 @argh.arg('-r', '--remove', help='Remove the tarball after extraction')
-def extract(target, dst='', into=False, verbose=True, remove=False):
+def extract(target, dst='', into=False, verbose=False, remove=False):
 	"""Extract Archive"""
 
 	# Check if the target exists
