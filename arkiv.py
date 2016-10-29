@@ -55,6 +55,6 @@ def extract(target, dst='', into=False, verbose=False, remove=False):
 		osutil.rm(target, verbose=verbose)
 
 if __name__ == '__main__':
-	praser = argh.ArghParser(prog=__file__.partition('/')[2].rpartition('.')[0], version='%(prog)s ' + __version__, description=__doc__)
+	praser = argh.ArghParser(prog=__file__.partition('/')[2].rpartition('.')[0], version='arkiv ' + __version__, description=__doc__)
 	praser.add_commands([create, extract])
 	argh.dispatch(praser)
